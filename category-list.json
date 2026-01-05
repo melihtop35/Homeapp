@@ -4,8 +4,8 @@
     {
       "id": "Developer",
       "name": {
-        "en_us": "Developer Tools",
-        "tr_tr": "Geliştirici Araçları"
+        "en_US": "Developer Tools",
+        "tr_TR": "Geliştirici Araçları"
       },
       "font": "apps",
       "icon": "code"
@@ -13,8 +13,8 @@
     {
       "id": "Media",
       "name": {
-        "en_us": "Media",
-        "tr_tr": "Medya"
+        "en_US": "Media",
+        "tr_TR": "Medya"
       },
       "font": "apps",
       "icon": "play-circle"
@@ -22,8 +22,8 @@
     {
       "id": "Network",
       "name": {
-        "en_us": "Network",
-        "tr_tr": "Ağ"
+        "en_US": "Network",
+        "tr_TR": "Ağ"
       },
       "font": "apps",
       "icon": "globe"
@@ -31,8 +31,8 @@
     {
       "id": "HomeAutomation",
       "name": {
-        "en_us": "Home Automation",
-        "tr_tr": "Ev Otomasyonu"
+        "en_US": "Home Automation",
+        "tr_TR": "Ev Otomasyonu"
       },
       "font": "apps",
       "icon": "home"
@@ -40,8 +40,8 @@
     {
       "id": "Productivity",
       "name": {
-        "en_us": "Productivity",
-        "tr_tr": "Verimlilik"
+        "en_US": "Productivity",
+        "tr_TR": "Verimlilik"
       },
       "font": "apps",
       "icon": "briefcase"
@@ -49,8 +49,8 @@
     {
       "id": "Download",
       "name": {
-        "en_us": "Download",
-        "tr_tr": "İndirme"
+        "en_US": "Download",
+        "tr_TR": "İndirme"
       },
       "font": "apps",
       "icon": "download"
@@ -58,8 +58,8 @@
     {
       "id": "Database",
       "name": {
-        "en_us": "Database",
-        "tr_tr": "Veritabanı"
+        "en_US": "Database",
+        "tr_TR": "Veritabanı"
       },
       "font": "apps",
       "icon": "database"
@@ -67,8 +67,8 @@
     {
       "id": "Utilities",
       "name": {
-        "en_us": "Utilities",
-        "tr_tr": "Yardımcı Araçlar"
+        "en_US": "Utilities",
+        "tr_TR": "Yardımcı Araçlar"
       },
       "font": "apps",
       "icon": "tool"
