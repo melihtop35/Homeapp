@@ -76,13 +76,13 @@ x-casaos:
     - amd64
     - arm64
   main: frontend
-  author: melih35
+  author: melihtop35
   category: Developer
   description:
     en_us: LLM Council - Multi-AI Chat Interface with Council Mode. Chat with multiple AI models simultaneously and get synthesized responses.
     tr_tr: LLM Council - Çoklu AI Sohbet Arayüzü. Birden fazla AI modeli ile aynı anda sohbet edin ve sentezlenmiş yanıtlar alın.
-  developer: melih35
-  icon: https://raw.githubusercontent.com/melih35/llm-council/main/frontend/public/icon.png
+  developer: melihtop35
+  icon: https://raw.githubusercontent.com/melihtop35/Homeapp/main/Apps/llm-council/icon.png
   index: /
   port_map: "5173"
   scheme: http
@@ -90,7 +90,7 @@ x-casaos:
   tagline:
     en_us: Multi-AI Chat with Council Mode
     tr_tr: Konsey Modlu Çoklu AI Sohbet
-  thumbnail: https://raw.githubusercontent.com/melih35/llm-council/main/screenshot.png
+  thumbnail: https://raw.githubusercontent.com/melihtop35/Homeapp/main/Apps/llm-council/screenshot.png
   tips:
     before_install:
       en_us: |

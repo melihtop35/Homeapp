@@ -18,13 +18,13 @@ Kendi özel CasaOS uygulama mağazam. Bu repository'yi CasaOS'a ekleyerek uygula
 4. "Add Source" butonuna tıklayın
 5. Aşağıdaki URL'yi ekleyin:
    ```
-   https://github.com/melih35/casaos-appstore/archive/refs/heads/main.zip
+   https://github.com/melihtop35/Homeapp/archive/refs/heads/main.zip
    ```
 
 ### Yöntem 2: Terminal
 
 ```bash
-casaos-cli app-management register app-store https://github.com/melih35/casaos-appstore/archive/refs/heads/main.zip
+casaos-cli app-management register app-store https://github.com/melihtop35/Homeapp/archive/refs/heads/main.zip
 ```
 
 ## 📁 Repository Yapısı
