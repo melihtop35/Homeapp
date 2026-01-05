@@ -4,9 +4,9 @@ Kendi özel CasaOS uygulama mağazam. Bu repository'yi CasaOS'a ekleyerek uygula
 
 ## 📦 Mevcut Uygulamalar
 
-| Uygulama                        | Açıklama                | Kategori  |
-| ------------------------------- | ----------------------- | --------- |
-| [LLM Council](Apps/llm-council) | Çoklu AI Sohbet Arayüzü | Developer |
+| Uygulama                          | Açıklama                | Kategori  |
+| --------------------------------- | ----------------------- | --------- |
+| [LLM Council](Apps/LLMCouncil) | Çoklu AI Sohbet Arayüzü | Developer |
 
 ## 🚀 App Store Nasıl Eklenir?
 
@@ -18,13 +18,13 @@ Kendi özel CasaOS uygulama mağazam. Bu repository'yi CasaOS'a ekleyerek uygula
 4. "Add Source" butonuna tıklayın
 5. Aşağıdaki URL'yi ekleyin:
    ```
-   https://github.com/melihtop35/Homeapp/archive/refs/heads/main.zip
+   https://github.com/melihtop35/Homeapp/archive/refs/heads/master.zip
    ```
 
 ### Yöntem 2: Terminal
 
 ```bash
-casaos-cli app-management register app-store https://github.com/melihtop35/Homeapp/archive/refs/heads/main.zip
+casaos-cli app-management register app-store https://github.com/melihtop35/Homeapp/archive/refs/heads/master.zip
 ```
 
 ## 📁 Repository Yapısı
