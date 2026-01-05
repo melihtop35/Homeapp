@@ -1,4 +1,4 @@
-version: "3.9"
+name: llm-council
 
 services:
   # ============ MONGODB ============
@@ -6,14 +6,9 @@ services:
     image: mongo:7
     container_name: llm-council-mongo
     restart: unless-stopped
-    ports:
-      - "27017:27017"
     volumes:
       - mongo_data:/data/db
     environment:
-      # İsteğe bağlı: Authentication eklemek için
-      # MONGO_INITDB_ROOT_USERNAME: admin
-      # MONGO_INITDB_ROOT_PASSWORD: password123
       TZ: Europe/Istanbul
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
@@ -26,18 +21,17 @@ services:
 
   # ============ BACKEND (FastAPI) ============
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
+    image: melih35/llm-council-backend:latest
     container_name: llm-council-backend
     restart: unless-stopped
     ports:
       - "8000:8000"
-    env_file:
-      - .env
     environment:
       - MONGODB_URL=mongodb://mongo:27017
       - MONGODB_DATABASE=llm_council
+    volumes:
+      # API key'ler .env dosyasında saklanır - kalıcı olması için mount ediyoruz
+      - llm_config:/app
     depends_on:
       mongo:
         condition: service_healthy
@@ -52,12 +46,7 @@ services:
 
   # ============ FRONTEND (Nginx) ============
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
-      args:
-        # Build time'da API URL (nginx proxy kullanacağız)
-        VITE_API_URL: ""
+    image: melih35/llm-council-frontend:latest
     container_name: llm-council-frontend
     restart: unless-stopped
     ports:
@@ -73,13 +62,45 @@ services:
     networks:
       - llm-network
 
-# ============ VOLUMES ============
 volumes:
   mongo_data:
-    name: llm-council-mongo-data
+  llm_config:
 
-# ============ NETWORKS ============
 networks:
   llm-network:
-    name: llm-council-network
     driver: bridge
+
+# CasaOS App Store Metadata
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: frontend
+  author: melihtop35
+  category: Developer
+  description:
+    en_us: LLM Council - Multi-AI Chat Interface with Council Mode. Chat with multiple AI models simultaneously and get synthesized responses.
+    tr_tr: LLM Council - Çoklu AI Sohbet Arayüzü. Birden fazla AI modeli ile aynı anda sohbet edin ve sentezlenmiş yanıtlar alın.
+  developer: melihtop35
+  icon: https://raw.githubusercontent.com/melihtop35/Homeapp/main/Apps/llm-council/icon.png
+  index: /
+  port_map: "5173"
+  scheme: http
+  store_app_id: llm-council
+  tagline:
+    en_us: Multi-AI Chat with Council Mode
+    tr_tr: Konsey Modlu Çoklu AI Sohbet
+  thumbnail: https://raw.githubusercontent.com/melihtop35/Homeapp/main/Apps/llm-council/screenshot.png
+  tips:
+    before_install:
+      en_us: |
+        After installation, go to Settings page in the app to add your API keys.
+        Supported providers: Groq, SambaNova, Google AI, Mistral, Cohere, HuggingFace
+        API keys are stored persistently in a Docker volume.
+      tr_tr: |
+        Kurulumdan sonra, API anahtarlarınızı eklemek için uygulamadaki Ayarlar sayfasına gidin.
+        Desteklenen sağlayıcılar: Groq, SambaNova, Google AI, Mistral, Cohere, HuggingFace
+        API anahtarları kalıcı olarak Docker volume'da saklanır.
+  title:
+    en_us: LLM Council
+    tr_tr: LLM Council
