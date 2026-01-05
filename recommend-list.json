@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "recommend": [
+    {
+      "app_id": "llm-council",
+      "title": {
+        "en_us": "LLM Council",
+        "tr_tr": "LLM Konsey"
+      },
+      "tagline": {
+        "en_us": "Chat with multiple AI models simultaneously",
+        "tr_tr": "Birden fazla AI modeli ile aynı anda sohbet edin"
+      },
+      "category": "Developer"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "categories": [
+    {
+      "id": "Developer",
+      "name": {
+        "en_us": "Developer Tools",
+        "tr_tr": "Geliştirici Araçları"
+      },
+      "font": "apps",
+      "icon": "code"
+    },
+    {
+      "id": "Media",
+      "name": {
+        "en_us": "Media",
+        "tr_tr": "Medya"
+      },
+      "font": "apps",
+      "icon": "play-circle"
+    },
+    {
+      "id": "Network",
+      "name": {
+        "en_us": "Network",
+        "tr_tr": "Ağ"
+      },
+      "font": "apps",
+      "icon": "globe"
+    },
+    {
+      "id": "HomeAutomation",
+      "name": {
+        "en_us": "Home Automation",
+        "tr_tr": "Ev Otomasyonu"
+      },
+      "font": "apps",
+      "icon": "home"
+    },
+    {
+      "id": "Productivity",
+      "name": {
+        "en_us": "Productivity",
+        "tr_tr": "Verimlilik"
+      },
+      "font": "apps",
+      "icon": "briefcase"
+    },
+    {
+      "id": "Download",
+      "name": {
+        "en_us": "Download",
+        "tr_tr": "İndirme"
+      },
+      "font": "apps",
+      "icon": "download"
+    },
+    {
+      "id": "Database",
+      "name": {
+        "en_us": "Database",
+        "tr_tr": "Veritabanı"
+      },
+      "font": "apps",
+      "icon": "database"
+    },
+    {
+      "id": "Utilities",
+      "name": {
+        "en_us": "Utilities",
+        "tr_tr": "Yardımcı Araçlar"
+      },
+      "font": "apps",
+      "icon": "tool"
+    }
+  ]
+}

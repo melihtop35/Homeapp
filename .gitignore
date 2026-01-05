@@ -1,0 +1,9 @@
+# Keep app store metadata in this repo; each app under Apps manages its own git history.
+# Ignore app source trees but allow the CasaOS-facing artifacts we need to publish.
+Apps/*/**
+!Apps/*/docker-compose.yml
+!Apps/*/docker-compose.casaos.yml
+!Apps/*/icon.png
+!Apps/*/README.md
+# Never track nested git repositories from app repos.
+Apps/*/.git
