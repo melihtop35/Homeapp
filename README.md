@@ -4,9 +4,9 @@ Kendi özel CasaOS uygulama mağazam. Bu repository'yi CasaOS'a ekleyerek uygula
 
 ## 📦 Mevcut Uygulamalar
 
-| Uygulama                          | Açıklama                | Kategori  |
-| --------------------------------- | ----------------------- | --------- |
-| [LLM Council](Apps/LLMCouncil) | Çoklu AI Sohbet Arayüzü | Developer |
+| Uygulama                        | Açıklama                                  | Kategori  |
+| ------------------------------- | ----------------------------------------- | --------- |
+| [LLM Council](Apps/LLMCouncil)  | Çoklu AI Sohbet Arayüzü                   | Developer |
 | [HumanVerify](Apps/HumanVerify) | Video Canlılık Tespiti ve Deepfake Önleme | Developer |
 
 ## 🚀 App Store Nasıl Eklenir?
