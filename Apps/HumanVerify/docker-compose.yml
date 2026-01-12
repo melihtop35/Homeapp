@@ -1,0 +1,202 @@
+name: humanverify
+services:
+  # =============================================================
+  # REDIS - Job Queue & Temporary Results Cache
+  # =============================================================
+  redis:
+    image: redis:7-alpine
+    container_name: humanverify-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - humanverify-network
+
+  # =============================================================
+  # HUMANVERIFY API - Video Liveness Detection
+  # =============================================================
+  humanverify-api:
+    image: melih35/humanverify-api:latest
+    container_name: humanverify-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Video uploads
+      - ./uploads:/app/uploads
+      # Logs
+      - ./logs:/app/logs
+      # Model cache (persistent)
+      - humanverify-cache:/app/.cache/torch
+      # Temporary processing
+      - ./temp:/app/temp
+    environment:
+      # GPU Configuration
+      - CUDA_VISIBLE_DEVICES=0
+      - TORCH_HOME=/app/.cache/torch
+      
+      # API Configuration
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - LOG_LEVEL=INFO
+      
+      # Processing Configuration
+      - MAX_VIDEO_SIZE=104857600
+      - VIDEO_TIMEOUT=120
+      - BATCH_SIZE=2
+      - PARALLEL_WORKERS=3
+      
+      # Redis Configuration
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - REDIS_QUEUE_NAME=verification_queue
+      - REDIS_RESULT_TTL=86400
+      
+      # Model paths
+      - MEDIAPIPE_MODEL=mediapipe
+      - FACENET_MODEL=/app/models/facenet.pth
+      - DEEPFAKE_MODEL=/app/models/deepfake_detector.pth
+      - LIVENESS_MODEL=/app/models/liveness_detector.pth
+      
+      # Callback Configuration (Laravel Backend)
+      - CALLBACK_ENABLED=true
+      - CALLBACK_URL=http://host.docker.internal:8080/api/verification-callback
+      - CALLBACK_SECRET=your-secret-key-here
+    
+    depends_on:
+      redis:
+        condition: service_healthy
+    
+    # GPU Resource allocation
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    restart: unless-stopped
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    
+    networks:
+      - humanverify-network
+
+  # =============================================================
+  # WORKER - Background Job Processor (GPU)
+  # =============================================================
+  humanverify-worker:
+    image: melih35/humanverify-api:latest
+    container_name: humanverify-worker
+    command: python worker.py
+    volumes:
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+      - humanverify-cache:/app/.cache/torch
+      - ./temp:/app/temp
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - TORCH_HOME=/app/.cache/torch
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - REDIS_QUEUE_NAME=verification_queue
+      - WORKER_CONCURRENCY=2
+      - LOG_LEVEL=INFO
+      - CALLBACK_ENABLED=true
+      - CALLBACK_URL=http://host.docker.internal:8080/api/verification-callback
+      - CALLBACK_SECRET=your-secret-key-here
+    
+    depends_on:
+      redis:
+        condition: service_healthy
+      humanverify-api:
+        condition: service_healthy
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    
+    restart: unless-stopped
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+    
+    networks:
+      - humanverify-network
+
+  # =============================================================
+  # REDIS COMMANDER - Web UI for Redis (Optional - Development)
+  # =============================================================
+  # redis-commander:
+  #   image: rediscommander/redis-commander:latest
+  #   container_name: humanverify-redis-ui
+  #   environment:
+  #     - REDIS_HOSTS=local:redis:6379
+  #   ports:
+  #     - "8081:8081"
+  #   depends_on:
+  #     - redis
+  #   networks:
+  #     - humanverify-network
+  #   restart: unless-stopped
+
+volumes:
+  humanverify-cache:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  humanverify-network:
+    driver: bridge
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: humanverify-api
+  author: melihtop35
+  category: Developer
+  description:
+    en_US: HumanVerify - Advanced Video Liveness Detection with AI. Verify human presence and prevent deepfakes using computer vision and deep learning models.
+    tr_TR: HumanVerify - AI ile Video Canlılık Tespiti. Bilgisayarla görü ve derin öğrenme modelleriyle insan varlığını doğrulayın ve deepfake'leri önleyin.
+  developer: melihtop35
+  icon: https://raw.githubusercontent.com/melihtop35/Homeapp/master/Apps/HumanVerify/icon.png
+  index: /docs
+  port_map: "8000"
+  scheme: http
+  tagline:
+    en_US: Video Liveness Detection & Deepfake Prevention
+    tr_TR: Video Canlılık Tespiti ve Deepfake Önleme
+  thumbnail: ""
+  title:
+    en_US: HumanVerify
+    tr_TR: HumanVerify

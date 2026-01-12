@@ -12,6 +12,18 @@
         "tr_TR": "Birden fazla AI modeli ile aynı anda sohbet edin"
       },
       "category": "Developer"
+    },
+    {
+      "app_id": "humanverify",
+      "title": {
+        "en_US": "HumanVerify",
+        "tr_TR": "HumanVerify"
+      },
+      "tagline": {
+        "en_US": "Advanced video liveness detection & deepfake prevention",
+        "tr_TR": "Gelişmiş video canlılık tespiti ve deepfake önleme"
+      },
+      "category": "Developer"
     }
   ]
 }
